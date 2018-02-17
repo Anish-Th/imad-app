@@ -5,8 +5,59 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+var articleOne ={
+    title: 'Article one |Anish Thandalam',
+    heading:'Article one',
+    date: '17th Feb 2018',
+    content:` <p>
+            This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.
+            </p>
+            <p>
+            This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.
+            </p>
+            <p>
+            This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.This is my first webpage.
+            </p>`,
+    
+};
+function createTemplate (data){
+    vat title =data.title;
+    var heading=data.heading;
+    var date=data.date;
+    var content=data.content;
+    var htmlTemplate = `
+        <html>
+        <head>
+            <title>
+                ${title}
+            </title>
+            <meta name="viewport" content="width=mobile-width, initial-scale=1"/>
+                    <link href="/ui/style.css" rel="stylesheet" />
+        </head>
+        <body>
+            <div class="container">
+            <div>
+                <a href="/">Home</a>
+            </div>
+            <hr/>
+            <h3>
+                ${heading}
+            </h3>
+            <div>
+                ${date}
+            </div>
+            ${content}
+            <div>
+            </div>
+            </div>
+        </body>
+    </html>
+    `;
+}
+return htmlTemplate;
+
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'index.html'));
+  res.sendFile(createTemplate(articleOne));
 });
 
 app.get('/article-one', function(req,res){
